@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Project</title>
+    <link rel="stylesheet" href="/style.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  /* background-color: #0101ef; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contain {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+.calculator {
+width: 300px;
+/* height: 500px; */
+box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.3),
+            -4px -4px 30px rgba(0, 0, 0, 0.3);
+border-radius: 12px;
+/* background:#6dd626; */
+background: #252AD0;
+overflow: hidden;
+}
+h1 {
+  text-align: center;
+  color: #080808;
+  text-transform: uppercase;
+  border: 1px solid red;
+  padding: 5px 10px;
+  background: #ffffffb4;
+  font-style:oblique;
+  font-weight: bolder;
+}
+
+
+form input {
+width: 95%;
+height: 150px;
+border: none;
+border-radius: 12px;
+font-size: 2rem;
+margin: -15px 10px 10px 5px;
+color: white;
+background: #5c5c5c;
+padding-right: 3px;
+/* background: #252AD0; */
+text-align: right;
+pointer-events: none;
+}
+
+.buttons {
+ display: flex; 
+ flex-wrap: wrap;
+ justify-content: space-between;
+ padding: 20px;
+ /* background: #FFFFFF; */
+}
+
+button {
+  flex: 0 0 19%;
+  margin: 5px 0;
+  border: 1px solid #000;
+  width: 60px;
+  height: 52px;
+  font-size: 22px;
+  font-weight: 600;
+  border-radius: 15px;
+  cursor: pointer;
+}
+button:active {
+  background: #000;
+  color: white;
+}
+
+.red_button {
+  background: rgb(255, 51, 0);
+  color: #fff;
+}
+.red_button:active {
+  background: rgb(187, 255, 0);
+  color: #000;
+}
+.yellow_bgd {
+  background: rgb(255, 174, 0);;
+}
+.yellow_bgd:active {
+  background: green;
+  color: #fff;
+}
+</style>
+</head>
+<body>
+   
+  
+    <section class="calculator">
+        <div style="display:inline-block;border:1px solid black;background-color:black;color:white;font-weight:700;font-family:Ubuntu,Arial;border-radius:8px;">
+  <a href="index.html" style="text-decoration:none;color:white;vertical-align:top;">Back</a>
+  </div>
+  
+        <div class="contain">
+            <div></div>
+        <h1>Calculator</h1>
+        <div></div>
+        </div>
+        <form>
+            <input type="text" class="cal_screen">
+        </form>
+        <div class="buttons">
+            
+            <button type="button" class="btn" data-num="7">7</button>
+            <button type="button" class="btn" data-num="8">8</button>
+            <button type="button" class="btn" data-num="9">9</button>
+            <button type="button" class="clear_btn red_button" data-num="C">C</button>
+            <button type="button" class="btn color_btn" data-num="*">×</button>
+
+            <br>
+
+            <button type="button" class="btn" data-num="4">4</button>
+            <button type="button" class="btn" data-num="5">5</button>
+            <button type="button" class="btn" data-num="6">6</button>
+            <button type="button" class="btn" id="get_percent" value="%" onclick="percentage()" data-num="%">%</button>
+            <button type="button" class="btn color_btn" data-num="-">–</button>
+
+            <br>
+
+            <button type="button" class="btn"data-num="1">1</button>
+            <button type="button" class="btn" data-num="2">2</button>
+            <button type="button" class="btn" data-num="3">3</button>
+            <button type="button" class="btn color_btn" data-num="+">+</button>
+            <button type="button" class="btn color_btn" data-num="/">÷</button>
+
+            <br>
+
+            <button type="button" class="btn" data-num=".">.</button>
+            <button type="button" class="btn" data-num="0">0</button>
+            <button type="button" class="btn" data-num="00">00</button>
+            <button type="button" class="btn" data-num="000">000</button>
+            <button type="button" class="equal_btn yellow_bgd" data-num="=">=</button>
+            <br>
+
+        </div>
+    </section>
+    <script>
+(function() {
+  let calScreen = document.querySelector('.cal_screen');
+  let buttons = document.querySelectorAll('.btn');
+  let clearBtn = document.querySelector('.clear_btn');
+  let equalBtn = document.querySelector('.equal_btn');
+
+  buttons.forEach(function (button) {
+    button.addEventListener('click', function(e) {
+      let value = e.target.dataset.num;
+      calScreen.value += value;
+    })
+  });
+
+  equalBtn.addEventListener('click', function(e) {
+    calScreen.value = calScreen.value.replace(/%/g, "/100*");
+    if (calScreen.value === '') {
+      calScreen.value = '0';
+    } else {
+      let answer = eval(calScreen.value);
+      calScreen.value = answer;
+    }
+  })
+  clearBtn.addEventListener('click', function(e) {
+    calScreen.value = "";
+  })
+  
+})()
+
+function percentage() {
+const part = 10;
+  const whole = 10;
+  const percentage = eval(`$(part)/100*$(whole)`);
+}
+</script>
+</body>
+</html>
